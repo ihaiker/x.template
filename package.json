@@ -1,0 +1,33 @@
+{
+  "name": "@haiker/npm x.template",
+  "version": "1.0.0",
+  "description": "gulp template plguins,Gulp模板,优雅的模板",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihaiker/x.template.git"
+  },
+  "keywords": [
+    "gulp",
+    "template",
+    "elegant"
+  ],
+  "author": "haiker",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/ihaiker/x.template/issues"
+  },
+  "homepage": "https://github.com/ihaiker/x.template#readme",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "defaults": "^1.0.3",
+    "event-stream": "^4.0.1",
+    "fs": "^0.0.1-security",
+    "gulp-util": "^3.0.8",
+    "path": "^0.12.7",
+    "process": "^0.11.10"
+  }
+}
