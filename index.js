@@ -25,8 +25,27 @@ function exportData(file) {
 
     var header = $(document).find("head").html();
     var body = $(document).find("body");
+    var bodyContent = body.html();
+    var xtemplates = body.find("xtemplate");
+    $.each(xtemplates, function (idx, template) {
+        var temp = $(template);
+        var layout = path.join(path.dirname(file.path),temp.attr("src"));
+        var layoutDatas = {};
+
+        $.each(template.attributes,function(index, element) {
+            var name = element.name;
+            var value = element.value;
+            if ("src" != name) {
+                layoutDatas[name] = temp.attr(name);
+            }
+        });
+        layoutDatas["body"] = temp.html();
+        var oldContent = temp.prop("outerHTML");
+        var content = artTemplate(layout, layoutDatas);
+        bodyContent = bodyContent.replace(oldContent, content);
+    });
     return {
-        title: title, header: header, body: body.html(), scripts: scripts
+        title: title, header: header, body: bodyContent, scripts: scripts
     };
 }
 
@@ -34,7 +53,7 @@ function getTemplateLayout(file) {
     var array = fs.readFileSync(file.path).toString().split("\n");
     var match = pattern.exec(array[0]);
     if (match) {
-        return path.join(path.dirname(file.path),match[2]);
+        return path.join(path.dirname(file.path), match[2]);
     }
     return null;
 }

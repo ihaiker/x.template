@@ -53,3 +53,33 @@ In your `*.html`
 
 ## License
 Apache License 2.0
+
+## history
+- v1.0.1
+
+  in your `*.html` `body` tag add `template` tag 
+  ```html
+   <xtemplate src="layout/modal.html" title="the value of param named title">
+      the body
+   </xtemplate>
+  ```
+  
+  `layouts/modal.html`
+  ```html
+     <div class="modal">
+      <div class="title"><%=title%></div>   
+      <div class="content">
+      <%=body%>
+      </div>
+    </div>
+  ```
+  
+  write html
+  ```html
+    <div class="modal">
+      <div class="title">the value of param named title</div>   
+      <div class="content">
+      the body
+      </div>
+    </div>
+  ```
