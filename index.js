@@ -19,7 +19,11 @@ function exportData(file) {
     global.document = document;
 
     var title = document.title;
-    var scripts = $(document).find("head script").prop("outerHTML");
+    var scripts = "";
+    var scriptsTags = $(document).find("head script");
+    $.each(scriptsTags,function (idx,doc) {
+        scripts += $(this).prop("outerHTML");
+    });
 
     $(document).find("head title,head script").remove();
 
