@@ -86,14 +86,15 @@ function getTemplateLayout(file) {
  * @returns {*}
  */
 function gulpElegantTemplate(options, defaultDatas) {
-    options = defaults({
+    options = defaults(options, {
         "root": processDir,
-        "tempalte": "./src/layouts/template.html"
-    }, options);
+        "tempalte": "./src/layouts/template.html",
+        "vue": false
+    });
 
     artTemplate.defaults.escape = false;
     artTemplate.defaults.root = options.root;
-    if(options.vue){ //语法冲突了
+    if (options.vue) { //语法冲突了
         artTemplate.defaults.rules[1].test = artTemplate.defaults.rules[0].test;
     }
 
