@@ -88,8 +88,7 @@ function getTemplateLayout(file) {
 function gulpElegantTemplate(options, defaultDatas) {
     options = defaults({
         "root": processDir,
-        "tempalte": "./src/layouts/template.html",
-        "vue": false
+        "tempalte": "./src/layouts/template.html"
     }, options);
 
     artTemplate.defaults.escape = false;
