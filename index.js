@@ -21,13 +21,13 @@ function exportData(file) {
     var params = {};
 
     var xargs = $(document).find("xargs");
-    $.each(xargs,function (idx,arg) {
+    $.each(xargs, function (idx, arg) {
         var args = $(arg);
         var key = args.attr("key");
-        if( key !== "" ){
+        if (key !== "") {
             var val = args.attr("value");
-            if(!val){
-                val =  args.html();
+            if (!val) {
+                val = args.html();
             }
             params[key] = val;
         }
@@ -37,7 +37,7 @@ function exportData(file) {
     var title = document.title;
     var scripts = "";
     var scriptsTags = $(document).find("head script");
-    $.each(scriptsTags,function (idx,doc) {
+    $.each(scriptsTags, function (idx, doc) {
         scripts += $(this).prop("outerHTML");
     });
 
@@ -49,10 +49,10 @@ function exportData(file) {
     var xtemplates = body.find("xtemplate");
     $.each(xtemplates, function (idx, template) {
         var temp = $(template);
-        var layout = path.join(path.dirname(file.path),temp.attr("src"));
+        var layout = path.join(path.dirname(file.path), temp.attr("src"));
         var layoutDatas = {};
 
-        $.each(template.attributes,function(index, element) {
+        $.each(template.attributes, function (index, element) {
             var name = element.name;
             var value = element.value;
             if ("src" != name) {
@@ -65,7 +65,7 @@ function exportData(file) {
         bodyContent = bodyContent.replace(oldContent, content);
     });
 
-    params = defaults(params,{
+    params = defaults(params, {
         title: title, header: header, body: bodyContent, scripts: scripts
     });
     return params;
@@ -88,11 +88,15 @@ function getTemplateLayout(file) {
 function gulpElegantTemplate(options, defaultDatas) {
     options = defaults({
         "root": processDir,
-        "tempalte": "./src/layouts/template.html"
+        "tempalte": "./src/layouts/template.html",
+        "vue": false
     }, options);
 
     artTemplate.defaults.escape = false;
     artTemplate.defaults.root = options.root;
+    if(options.vue){ //语法冲突了
+        artTemplate.defaults.rules[1].test = artTemplate.defaults.rules[0].test;
+    }
 
     function process(file) {
         if (file.isStream()) {
