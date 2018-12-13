@@ -55,7 +55,14 @@ In your `*.html`
 Apache License 2.0
 
 ## history
-- v1.0.1
+- v1.2.0
+    in your `*.html` add `xargs` tag, This tag is used to set parameters
+    ```html
+    <xargs key="arg" value="atrValue"/>
+    or
+    <xargs key="arg">bodyValue</xargs>
+    ```
+- v1.1.0
 
   in your `*.html` `body` tag add `template` tag 
   ```html

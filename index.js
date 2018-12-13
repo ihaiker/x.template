@@ -18,6 +18,22 @@ function exportData(file) {
     var {document} = (new JSDOM(String(fs.readFileSync(file.path)))).window;
     global.document = document;
 
+    var params = {};
+
+    var xargs = $(document).find("xargs");
+    $.each(xargs,function (idx,arg) {
+        var args = $(arg);
+        var key = args.attr("key");
+        if( key !== "" ){
+            var val = args.attr("value");
+            if(!val){
+                val =  args.html();
+            }
+            params[key] = val;
+        }
+    });
+    $(document).find("xargs").remove();
+
     var title = document.title;
     var scripts = "";
     var scriptsTags = $(document).find("head script");
@@ -48,9 +64,11 @@ function exportData(file) {
         var content = artTemplate(layout, layoutDatas);
         bodyContent = bodyContent.replace(oldContent, content);
     });
-    return {
+
+    params = defaults(params,{
         title: title, header: header, body: bodyContent, scripts: scripts
-    };
+    });
+    return params;
 }
 
 function getTemplateLayout(file) {
